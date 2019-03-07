@@ -19,6 +19,17 @@ server.get('/hobbits', async (req, res) => {
 server.post('/hobbits', async (req, res) => {
   const newHob = await hobbits.insert(req.body);
   res.status(200).json(newHob);
-})
+});
+
+server.delete('/hobbits/:id', async (req,res) => {
+  const id = req.params.id;
+  try {
+    hobbits.remove(id).then(then => {
+      res.status(200).json({message: "this hobbit has been deleted"})
+    });
+  } catch (error) {
+    res.status(500).json({errorMessage: 'error deleting the hobbit'});
+  }
+});
 
 module.exports = server;

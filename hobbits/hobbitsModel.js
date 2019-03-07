@@ -20,8 +20,9 @@ async function update(id, changes) {
   return null;
 }
 
-function remove(id) {
-  return null;
+async function remove(id) {
+  return db('hobbits')
+    .where({id}).delete();
 }
 
 function getAll() {
